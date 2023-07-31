@@ -34,7 +34,7 @@
           <tr v-for="(producto, i) in productos" :key="i">
             <td>{{ producto.Codigo }}</td>
             <td>{{ producto.Nombre }}</td>
-            <td :style="producto.Cantidad<10? 'color:red':'color:blue'">{{ producto.Cantidad }}</td>
+            <td :style="producto.Cantidad<10? 'color:red': producto.Cantidad>50 ? 'color: blue;' : 'color: black;'">{{ producto.Cantidad }}</td>
             <td>{{ producto.Precio }}</td>
             <td>{{ producto.Costo }}</td>
           </tr>
