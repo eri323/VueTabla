@@ -34,7 +34,7 @@
           <tr v-for="(producto, i) in productos" :key="i">
             <td>{{ producto.Codigo }}</td>
             <td>{{ producto.Nombre }}</td>
-            <td :style="producto.Cantidad<10? 'color:red': producto.Cantidad>50 ? 'color: blue;' : 'color: black;'">{{ producto.Cantidad }}</td>
+            <td :style="producto.Cantidad<10? 'border: 4px solid red; background-color: rgb(255, 121, 121);': producto.Cantidad>50 ? 'border: 4px solid blue ;background-color: rgb(124, 177, 255);' : 'border: 5px solid black ;background-color: rgb(124, 124, 124);'">{{ producto.Cantidad }}</td>
             <td>{{ producto.Precio }}</td>
             <td>{{ producto.Costo }}</td>
           </tr>
@@ -73,7 +73,7 @@ function agregarProducto() {
 
 <style scoped>
 .body{
-  background-color: rgb(101, 250, 255);
+  background-color: rgb(101, 250, 255); 
   padding: 30px;
   border-radius: 20px;
 }
@@ -98,10 +98,10 @@ function agregarProducto() {
   margin-top: 30px;
 }
 th, td{
-  border: 3px solid black;
+ border: 3px solid black;
   padding: 10px;
   text-align: center;
-  border-radius: 25px;
+
 }
 .tabla{
   border-collapse: collapse;
