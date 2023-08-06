@@ -14,28 +14,32 @@
 
               <h1 class="title">Datos de la tabla</h1>
               <div class="codigodiv" id="divs">
-                <label for="Codigo">Código</label>
-                <div v-text="Error_codigo"  ></div>
+                <label>Código</label>
+                <h1 v-text="Error_codigo"></h1>
                 <input type="text" v-model="Codigo" id="Codigo" class="cajas">
               </div>
               <div class="nombrediv" id="divs">
                 <label for="Nombre">Nombre</label>
+                <h1 v-text="Error_nombre"></h1>
                 <input type="text" v-model="Nombre" id="Nombre" class="cajas">
               </div>
 
               <div class="cantidaddiv" id="divs">
                 <label for="Cantidad">Cantidad</label>
+                <h1 v-text="Error_cantidad"></h1>
                 <input type="number" v-model="Cantidad" id="Cantidad" class="cajas">
               </div>
 
               <div class="preciodiv" id="divs">
                 <label for="Precio">Precio</label>
+                <h1 v-text="Error_precio"></h1>
                 <input type="number" v-model="Precio" id="Precio" class="cajas">
               </div>
 
               <div class="costodiv" id="divs">
 
                 <label for="Costo">Costo</label>
+                <h1 v-text="Error_costo"></h1>
                 <input type="number" v-model="Costo" id="Costo" class="cajas">
               </div>
 
@@ -61,7 +65,7 @@
       <table class="tabla">
         <thead class="tablahead">
           <tr>
-            <th style="border-left: 3px solid black;">Código</th>
+            <th id="th1">Código</th>
             <th>Nombre</th>
             <th>Cantidad</th>
             <th>Precio</th>
@@ -69,7 +73,7 @@
             <th>Precio Total</th>
               <th>Costo Total</th>
               <th>Ganancias</th>
-            <th style="border-right: 3px solid black;">Opciones</th>
+            <th id="th9">Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -103,7 +107,12 @@ const Nombre = ref("")
 const Cantidad = ref(0)
 const Precio = ref(0)
 const Costo = ref(0)
-
+let Error_codigo = ref("")
+let Error_nombre = ref("")
+let Error_cantidad = ref("")
+let Error_precio = ref("")
+let Error_costo = ref("")
+let codigodiv = ref("")
 
 
 let Boton = ref("Agregar")
@@ -128,7 +137,10 @@ function agregarProducto() {
         Cantidad: Cantidad.value,
         Precio: Precio.value,
         Costo: Costo.value,
+        
       };
+      validar();
+
       productos.value.splice(indiceEdicion.value, 1, productoEditado);
       Boton.value = "Agregar";
       Limpiar();
@@ -141,7 +153,9 @@ function agregarProducto() {
       Cantidad: Cantidad.value,
       Precio: Precio.value,
       Costo: Costo.value,
+      
     };
+    validar();
     productos.value.push(nuevoProducto);
     Limpiar();
     cerrarModal();
@@ -172,7 +186,15 @@ function Editar(Edi, index) {
 }
 
 
+let validation = false
+function validar(){
+  if(Codigo.value.trim()==""){
+    Error_codigo.value ="Error";
+    codigodiv.value.style = "border:1px solid red"
 
+
+  }
+}
 
 </script>
 
@@ -207,22 +229,32 @@ function Editar(Edi, index) {
 }
 
 #Edibtn:hover{
-  background-color: rgb(196, 255, 196);
+  background-color: rgb(90, 255, 178);
+  transform:   scale(1.1);
+  border: 3px solid green; 
 }
 
 #Elibtn:hover{
   background-color: rgb(255, 179, 179);
+  transform:   scale(1.1);
+  border: 3px solid red; 
 }
 #Elibtn{
-  border: 3px solid red; 
+ border: none;
   background-color: rgb(255, 215, 215);
 }
 #Edibtn{
-  border: 3px solid green; 
+  border: none;
   background-color: rgb(133, 255, 200);
 }
 
+#th1{
+  border-top-left-radius: 25px;
+}
+#th9{
+  border-top-right-radius: 25px;
 
+}
 
 .tabladiv {
   font-size: 25px;
@@ -237,7 +269,6 @@ function Editar(Edi, index) {
 
 
 td {
-  border: 3px solid black;
   padding: 10px;
   text-align: center;
 
@@ -245,7 +276,7 @@ td {
 
 .tabla {
   box-shadow: 5px 5px 114px rgb(162, 247, 255);
-  width: 1400px;
+
   border-collapse: collapse;
 
 }
@@ -255,22 +286,25 @@ td {
   padding: 15px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   border-radius: 10px;
-  border: 3px rgb(0, 136, 255) solid;
+ border: none;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  background-color: rgb(161, 219, 255);
-  
+  font-size: 25px;
+  background-color: rgb(184, 228, 255);
+  cursor: pointer;
   color: black;
 }
-
+tr:nth-child(even) {
+  background-color: rgb(184, 228, 255); /* Color para las filas impares */
+}
 #boton:hover {
-  background-color: rgb(0, 162, 255);
+  background-color: rgb(135, 211, 255);
+  transform:   scale(1.1);
+  border: 3px rgb(0, 136, 255) solid;
+
 }
 
 th {
   background-color: rgb(113, 189, 255);
-  border-top: 3px solid black;
-  
   padding: 10px;
   text-align: center;
 
@@ -281,7 +315,7 @@ th {
   display: flex;
   flex-direction: column;
   width: 200px;
-  gap: 10px;
+
   background-color: aliceblue;
   padding: 15px;
   border-radius: 20px;
