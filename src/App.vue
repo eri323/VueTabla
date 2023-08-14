@@ -11,9 +11,9 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               <h4 id="Alerta"></h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" ref="modalbody">
 
-              <h1 class="title">Datos de la tabla</h1>
+              <h1 class="title">{{Err}}</h1>
               <div class="codigodiv" id="divs" ref="codigodivRef">
                 <label>{{ Error_c }}</label>
                 <input type="text" v-model="Codigo" id="Codigo" class="cajas">
@@ -78,7 +78,7 @@
             <td>{{ producto.Codigo }}</td>
             <td>{{ producto.Nombre }}</td>
             <td
-              :style="producto.Cantidad < 10 ? 'border: 4px solid red; background-color: rgb(255, 121, 121);' : producto.Cantidad > 50 ? 'border: 4px solid blue ;background-color: rgb(124, 177, 255);' : ''">
+              :style="producto.Cantidad < 10 ? 'border: 3px solid red; background-color: rgb(255, 121, 121);' : producto.Cantidad > 50 ? 'border: 3px solid blue ;background-color: rgb(124, 177, 255);' : ''">
               {{ producto.Cantidad }}</td>
             <td>{{ producto.Precio }}</td>
             <td>{{ producto.Costo }}</td>
@@ -191,33 +191,45 @@ let Error_c = ref("Codigo")
 let Error_n = ref("Nombre")
 let Error_ca = ref("Cantidad")
 let Error_p = ref("Precio")
-let Error_co = ref("Codigo")
-
-
+let Error_co = ref("Costo")
+let modalbody = ref("")
+let Err = ref("Datos de la tabla")
+function Error(){
+    
+    
+    
+    
+    
+    modalbody.value.style.borderTop = "5px solid red";
+    modalbody.value.style.borderBottom = "5px solid red";
+   /*  Err.value.style.fontSize = "15px"; */
+    Err.value= "Por favor digite todos los campos";
+}
 
 
 function validar() {
   let validation = true;
   if (Codigo.value.trim() == "") {
-    Error_c.value = "Por favor digite el codigo del producto";
     codigodivRef.value.style.border = "5px solid red";
     codigodivRef.value.style.backgroundColor = "rgb(255, 179, 179)";
-
+    Error()
     setTimeout(function () {
-      Error_c.value = "Codigo";
+      Err.value = "Datos de la tabla";
       codigodivRef.value.style = "";
+      modalbody.value.style = "";
     }, 2500)
     validation = false;
   }
 
   else if (Nombre.value.trim() == "") {
-    Error_n.value = "Por favor digite el nombre del producto";
     nombredivRef.value.style.border = "5px solid red";
     nombredivRef.value.style.backgroundColor = "rgb(255, 179, 179)";
+    Error()
 
     setTimeout(function () {
-      Error_n.value = "Nombre";
+      Err.value = "Datos de la tabla";
       nombredivRef.value.style = "";
+      modalbody.value.style = "";
     }, 2500)
     validation = false;
   }
@@ -225,37 +237,39 @@ function validar() {
 
 
   else if ((isNaN(parseFloat(Cantidad.value)) || parseFloat(Cantidad.value) <= 0)) {
-    Error_ca.value = "Por favor digite la cantidad del producto";
     cantidaddivRef.value.style.border = "5px solid red";
     cantidaddivRef.value.style.backgroundColor = "rgb(255, 179, 179)";
+    Error()
     
     setTimeout(function () {
-      Error_ca.value = "Cantidad";
+      Err.value = "Datos de la tabla";
       cantidaddivRef.value.style = "";
+      modalbody.value.style = "";
     }, 2500)
     validation = false;
   }
 
   else if ((isNaN(parseFloat(Precio.value)) || parseFloat(Precio.value) <= 0)) {
-    Error_p.value = "Por favor digite el precio del producto";
     preciodivRef.value.style.border = "5px solid red";
     preciodivRef.value.style.backgroundColor = "rgb(255, 179, 179)";
-    
+    Error()
     setTimeout(function () {
-      Error_p.value = "Precio";
+      Err.value = "Datos de la tabla";
       preciodivRef.value.style = "";
+      modalbody.value.style = "";
     }, 2500)
     validation = false;
   }
 
   else if ((isNaN(parseFloat(Costo.value)) || parseFloat(Costo.value) <= 0)) {
-    Error_co.value = "Por favor digite el costo del producto";
     costodivRef.value.style.border = "5px solid red";
     costodivRef.value.style.backgroundColor = "rgb(255, 179, 179)";
+    Error()
     
     setTimeout(function () {
-      Error_co.value = "Costo";
+      Err.value = "Datos de la tabla";
       costodivRef.value.style = "";
+      modalbody.value.style = "";
     }, 2500)
     validation = false;
   }
