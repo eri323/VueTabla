@@ -273,6 +273,18 @@ function validar() {
     }, 2500)
     validation = false;
   }
+  else if(Costo.value>Precio.value) {
+    costodivRef.value.style.border = "5px solid red";
+    costodivRef.value.style.backgroundColor = "rgb(255, 179, 179)";
+    Err.value= "El Costo del producto no puede ser mayor a su precio";
+    
+    setTimeout(function () {
+      Err.value = "Datos de la tabla";
+      costodivRef.value.style = "";
+      modalbody.value.style = "";
+    }, 2500)
+    validation = false;
+  }
   return validation;
 }
 
